@@ -7,7 +7,7 @@ RUN npm ci
 COPY --chown=node:node . .
 USER node
 
-FROM node:18.13.0-alphine As build
+FROM node:18.13.0-alpine As build
 
 WORKDIR /usr/src/app
 RUN apk add --no-cache g++ make python3
