@@ -3,7 +3,7 @@
 # BUILD FOR LOCAL DEVELOPMENT
 ###################
 
-FROM node:18.9.0-alpine3.15 As development
+FROM node:18.13.0-alpine As development
 
 WORKDIR /usr/src/app
 RUN apk add --no-cache g++ make python3
@@ -16,7 +16,7 @@ USER node
 # BUILD FOR PRODUCTION
 ###################
 
-FROM node:18.9.0-alpine3.15 As build
+FROM node:18.13.0-alpine As build
 
 WORKDIR /usr/src/app
 RUN apk add --no-cache g++ make python3
@@ -35,7 +35,7 @@ USER node
 # PRODUCTION
 ###################
 
-FROM node:18.9.0-alpine3.15 As production
+FROM node:18.13.0-alpine As production
 
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
