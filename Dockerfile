@@ -1,4 +1,4 @@
-FROM node:18.13.0-alpine As development
+FROM node:18.9.0-alpine3.15 As development
 
 WORKDIR /usr/src/app
 RUN apk add --no-cache g++ make python3
@@ -7,7 +7,7 @@ RUN npm ci
 COPY --chown=node:node . .
 USER node
 
-FROM node:18.13.0-alpine As build
+FROM node:18.9.0-alpine3.15 As build
 
 WORKDIR /usr/src/app
 RUN apk add --no-cache g++ make python3
@@ -24,7 +24,7 @@ USER node
 
 #production
 
-FROM node:18.13.0-alpine as production
+FROM node:18.9.0-alpine3.15 as production
 
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
