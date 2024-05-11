@@ -6,7 +6,7 @@ on:
       - 'dev'
 
 jobs:
-  docker:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -49,3 +49,25 @@ jobs:
             cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/e-voters-api:buildcache
             # List of cache export destinations for buildx (e.g., user/app:cache, type=local,dest=path/to/dir)
             cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/e-voters-api:buildcache,mode=max
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH Remote Commands
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          # SSH host address.
+          host: ${{ secrets.SSH_HOST }}
+            # SSH port number.
+          port: 22
+          # SSH username.
+          username: ${{ secrets.SSH_USERNAME }}
+          # Content of the SSH private key. For example, the raw content of ~/.ssh/id_rsa.
+          key: ${{ secrets.SSH_TOKEN }}
+          # Commands to be executed.
+          script: |
+            cd deployment-scripts/e-voters/
+            docker compose pull e-voters-api
+            docker compose up e-voters-api -d
+            docker compose logs --tail 30 e-voters-api
