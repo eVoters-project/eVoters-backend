@@ -1,3 +1,8 @@
+
+###################
+# BUILD FOR LOCAL DEVELOPMENT
+###################
+
 FROM node:18.9.0-alpine3.15 As development
 
 WORKDIR /usr/src/app
@@ -7,24 +12,30 @@ RUN npm ci
 COPY --chown=node:node . .
 USER node
 
+###################
+# BUILD FOR PRODUCTION
+###################
+
 FROM node:18.9.0-alpine3.15 As build
 
 WORKDIR /usr/src/app
 RUN apk add --no-cache g++ make python3
 COPY --chown=node:node package*.json ./
-COPY --chown=node:node --from=development /usr/src/app/node_modules ./nodule_modules
+COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node . .
 RUN npm run build
 
-# set node_env environment variable
+# Set NODE_ENV environment variable
 ENV NODE_ENV production
 RUN npm ci --only=production && npm cache clean --force
 
 USER node
 
-#production
+###################
+# PRODUCTION
+###################
 
-FROM node:18.9.0-alpine3.15 as production
+FROM node:18.9.0-alpine3.15 As production
 
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
