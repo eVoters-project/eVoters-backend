@@ -1,9 +1,9 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { AuthModule } from './modules/auth/auth.module';
-import { LoggingMiddleware } from './middleware/logging.middleware';
-import { UserModule } from './modules/settings/user/user.module';
+
+import { LoggingMiddleware } from './middleware';
+
+import { AuthModule } from './modules/auth';
+import { UserModule } from './modules/settings';
 
 @Module({
   imports: [

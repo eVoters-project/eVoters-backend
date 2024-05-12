@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { json } from 'express';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { HttpExceptionFilter } from './exception-filters/http-exception-filter';
+import { HttpExceptionFilter } from './exception-filters';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -33,6 +33,7 @@ async function bootstrap() {
     .setDescription('Api for E - Voters App')
     .setVersion('')
     .addTag('')
+    .addBearerAuth()
     .build();
 
   // 
