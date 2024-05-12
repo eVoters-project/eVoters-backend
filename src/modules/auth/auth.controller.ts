@@ -2,7 +2,7 @@ import { Body, Controller, Post } from "@nestjs/common";
 import { ApiBody, ApiTags } from "@nestjs/swagger";
 import { LoginRequestDto } from "./dto/login-request.dto";
 
-@ApiTags('Authorization')
+@ApiTags('Authentication')
 @Controller({
     path: 'auth',
     version: '1'
