@@ -1,5 +1,5 @@
-import { Controller, Get } from "@nestjs/common";
-import { ApiTags } from "@nestjs/swagger";
+import { Controller, Delete, Get, Param } from "@nestjs/common";
+import { ApiParam, ApiTags } from "@nestjs/swagger";
 import { PartyService } from "./party.service";
 
 @ApiTags('Party')
@@ -13,7 +13,25 @@ export class PartyController {
 
     @Get()
     getParties() {
-        return 'Fetching Parties';
+        return this.service.getParties();
+    }
+
+    @Get(':id')
+    @ApiParam({
+        name: 'id',
+        required: true
+    })
+    getPartyById(@Param('id') id: string) {
+        return this.service.getPartyById(id);
+    }
+
+    @Delete(':id')
+    @ApiParam({
+        name: 'id',
+        required: true
+    })
+    deleteParty(@Param('id') id: string) {
+        return this.service.deleteParty(id);
     }
     
 }

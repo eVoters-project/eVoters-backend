@@ -1,5 +1,5 @@
-import { Controller, Get } from "@nestjs/common";
-import { ApiTags } from "@nestjs/swagger";
+import { Controller, Delete, Get, Param } from "@nestjs/common";
+import { ApiParam, ApiTags } from "@nestjs/swagger";
 import { StrawVoteService } from "./straw-vote.service";
 
 @ApiTags('Straw - Votes')
@@ -13,7 +13,25 @@ export class StrawVoteController {
 
     @Get()
     getStrawVotes() {
-        return 'Fetching Straw-Votes';
+        return this.service.getStrawVotes();
+    }
+
+    @Get(':id')
+    @ApiParam({
+        name: 'id',
+        required: true
+    })
+    getStrawVoteById(@Param('id') id: string) {
+        return this.service.getStrawVoteById(id);
+    }
+
+    @Delete(':id')
+    @ApiParam({
+        name: 'id',
+        required: true
+    })
+    deleteStrawVote(@Param('id') id: string) {
+        return this.service.deleteStrawVote(id);
     }
 
 }

@@ -1,5 +1,5 @@
-import { Controller, Get } from "@nestjs/common";
-import { ApiTags } from "@nestjs/swagger";
+import { Controller, Delete, Get, Param } from "@nestjs/common";
+import { ApiParam, ApiTags } from "@nestjs/swagger";
 import { VoteCountService } from "./vote-count.service";
 
 @ApiTags('Vote - Count')
@@ -13,7 +13,25 @@ export class VoteCountController {
 
     @Get()
     getVoteCounts() {
-        return 'Fetching Vote-Counts';
+        return this.service.getVoteCounts();
+    }
+
+    @Get(':id')
+    @ApiParam({
+        name: 'id',
+        required: true
+    })
+    getVoteCountById(@Param('id') id: string) {
+        return this.service.getVoteCountById(id);
+    }
+
+    @Delete(':id')
+    @ApiParam({
+        name: 'id',
+        required: true
+    })
+    deleteVoteCount(@Param('id') id: string) {
+        return this.service.deleteVoteCount(id);
     }
 
 }

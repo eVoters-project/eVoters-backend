@@ -1,5 +1,5 @@
-import { Controller, Get } from "@nestjs/common";
-import { ApiTags } from "@nestjs/swagger";
+import { Controller, Delete, Get, Param } from "@nestjs/common";
+import { ApiParam, ApiTags } from "@nestjs/swagger";
 import { LeaderService } from "./leader.service";
 
 @ApiTags('Leader')
@@ -13,7 +13,25 @@ export class LeaderController {
 
     @Get()
     getLeaders() {
-        return 'Fetching Leaders';
+        return this.service.getLeaders();
+    }
+
+    @Get(':id')
+    @ApiParam({
+        name: 'id',
+        required: true
+    })
+    getLeaderById(@Param('id') id: string) {
+        return this.service.getLeaderById(id);
+    }
+
+    @Delete(':id')
+    @ApiParam({
+        name: 'id',
+        required: true
+    })
+    deleteLeader(@Param('id') id: string) {
+        return this.service.deleteLeader(id);
     }
     
 }
