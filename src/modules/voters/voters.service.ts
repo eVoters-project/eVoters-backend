@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { CreateVoterDto } from "src/dto";
 import { VoterEntity } from "src/entity";
 import { DataSource } from "typeorm";
 
@@ -17,6 +18,11 @@ export class VotersService {
                 id: id
             }
         });
+    }
+
+    createVoter(dto: CreateVoterDto) {
+        var model = this.datasource.manager.create(VoterEntity, dto);
+        return this.datasource.manager.save(VoterEntity, model);
     }
 
     async deleteVoter(id: string) {
