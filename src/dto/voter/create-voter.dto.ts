@@ -60,4 +60,12 @@ export class CreateVoterDto implements VoterEntityInterface {
     @ApiProperty({ default: '' })
     @IsString()
     vote_status: string;
+
+    @ApiProperty({ default: '' })
+    @IsString()
+    latitude: string;
+
+    @ApiProperty({ default: '' })
+    @IsString()
+    longitude: string;
 }

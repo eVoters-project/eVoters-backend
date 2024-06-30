@@ -46,4 +46,10 @@ export class VoterEntity extends BaseEntity implements VoterEntityInterface {
     @Column({ type: 'nvarchar', length: 50 })
     vote_status: string;
 
+    @Column({ type: 'nvarchar', length: 100 })
+    latitude: string;
+
+    @Column({ type: 'nvarchar', length: 100 })
+    longitude: string;
+
 }

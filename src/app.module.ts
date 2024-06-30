@@ -3,7 +3,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { LoggingMiddleware } from './middleware';
 
 import { AuthModule } from './modules/auth';
-import { UserModule } from './modules/settings';
+import { GroupTypeModule, UserModule } from './modules/settings';
 
 import { DashboardModule } from './modules/dashboard';
 import { CampaignModule } from './modules/campaign';
@@ -25,7 +25,8 @@ import { ResponseTransFormInterceptor } from './interceptors';
     VoteCountModule,
     StrawVoteModule,
     VotersModule,
-    UserModule
+    UserModule,
+    GroupTypeModule
   ],
   controllers: [],
   providers: [

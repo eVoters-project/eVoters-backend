@@ -15,4 +15,6 @@ export interface VoterEntityInterface extends BaseEntityInterface {
     vote_group: string;
     vote_type: string;
     vote_status: string;
+    longitude: string;
+    latitude: string;
 }
