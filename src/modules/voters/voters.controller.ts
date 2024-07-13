@@ -1,7 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
 import { ApiBody, ApiParam, ApiTags } from "@nestjs/swagger";
 import { VotersService } from "./voters.service";
-import { CreateVoterDto } from "src/dto";
+import { CreateVoterDto, UpdateVoterDto } from "src/dto";
 
 @ApiTags('Voters')
 @Controller({
@@ -10,7 +10,7 @@ import { CreateVoterDto } from "src/dto";
 })
 export class VotersController {
 
-    constructor(private service: VotersService) {}
+    constructor(private service: VotersService) { }
 
     @Get()
     getVoters() {
@@ -32,6 +32,17 @@ export class VotersController {
     })
     createVoter(@Body() body: CreateVoterDto) {
         return this.service.createVoter(body);
+    }
+    @Patch(':id')
+    @ApiParam({
+        name: 'id',
+        required: true
+    })
+    @ApiBody({
+        type: UpdateVoterDto
+    })
+    updateVoter(@Param('id') id: string, @Body() body: UpdateVoterDto) {
+        return this.service.updateVoter(id, body);
     }
 
     @Delete(':id')

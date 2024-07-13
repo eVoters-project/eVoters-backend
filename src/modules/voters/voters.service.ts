@@ -1,12 +1,12 @@
 import { Injectable } from "@nestjs/common";
-import { CreateVoterDto } from "src/dto";
+import { CreateVoterDto, UpdateVoterDto } from "src/dto";
 import { VoterEntity } from "src/entity";
 import { DataSource } from "typeorm";
 
 @Injectable()
 export class VotersService {
 
-    constructor(private datasource: DataSource) {}
+    constructor(private datasource: DataSource) { }
 
     getVoters() {
         return this.datasource.manager.find(VoterEntity);
@@ -23,6 +23,11 @@ export class VotersService {
     createVoter(dto: CreateVoterDto) {
         var model = this.datasource.manager.create(VoterEntity, dto);
         return this.datasource.manager.save(VoterEntity, model);
+    }
+
+    updateVoter(id: string, dto: UpdateVoterDto) {
+        console.log('reach at service level');
+        return this.datasource.manager.update(VoterEntity, id, dto);
     }
 
     async deleteVoter(id: string) {
