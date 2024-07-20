@@ -8,3 +8,7 @@ export * from './entity/user/user.entity.interface';
 export * from './entity/campaign/campaign.entity.interface';
 export * from './entity/straw-vote/straw-vote.entity.interface';
 export * from './entity/vote-count/vote-count.entity.interface';
+
+export * from './entity/voter-base/voter-base.entity.interface';
+export * from './entity/voter-influence/voter-influence.interface';
+export * from './entity/voter-influence-sub/voter-influence-sub.interface';

@@ -6,3 +6,6 @@ export * from './party/party.entity';
 export * from './straw-vote/straw-vote.entity';
 export * from './straw-vote/straw-vote.entity';
 export * from './campaign/campaign.entity';
+
+export * from './voter-base/voter-base.entity';
+export * from './voter-influence/voter-influence.entity';

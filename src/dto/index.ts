@@ -3,3 +3,10 @@ export * from './voter/update-voter.dto';
 
 export * from './leader/create-leader.dto';
 export * from './leader/update-leader.dto';
+
+export * from './voter-base/create-voter-base.dto';
+export * from './voter-base/update-voter-base.dto';
+
+export * from './voter-influence/response-voter-influence.dto';
+export * from './voter-influence/create-voter-influence.dto';
+export * from './voter-influence/update-voter-influence.dto';

@@ -33,6 +33,7 @@ export class VotersController {
     createVoter(@Body() body: CreateVoterDto) {
         return this.service.createVoter(body);
     }
+
     @Patch(':id')
     @ApiParam({
         name: 'id',
