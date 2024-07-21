@@ -49,16 +49,21 @@ export class VoterInfluenceSubService {
     }
 
     private responseDto(entity: VoterInfluenceSubEntity): ResponseVoterInfluenceSubDto {
-        const { id, code, description, remarks, status, voter_influence } = entity;
-        const rDto: ResponseVoterInfluenceSubDto = { id, code, description, remarks, status, voter_influence };
-        return rDto;
+        return Object.assign(new ResponseVoterInfluenceSubDto(), (({
+            id, code, description, remarks, status, voter_influence
+        }) => ({
+            id, code, description, remarks, status, voter_influence
+        }))(entity));
     }
 
     private responseDtoArray(entity: VoterInfluenceSubEntity[]): ResponseVoterInfluenceSubDto[] {
         const rDto: ResponseVoterInfluenceSubDto[] = [];
         entity.forEach(e => {
-            const { id, code, description, remarks, status, voter_influence } = e;
-            rDto.push({ id, code, description, remarks, status, voter_influence: { id: voter_influence?.id } });
+            rDto.push(Object.assign(new ResponseVoterInfluenceSubDto(), (({
+                id, code, description, remarks, status, voter_influence
+            }) => ({
+                id, code, description, remarks, status, voter_influence: (({ id }) => ({ id }))(voter_influence)
+            }))(e)));
         });
         return rDto;
     }

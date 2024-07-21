@@ -1,6 +1,6 @@
 import { BaseEntityInterface } from "src/interface/abstract/entity/base.entity.interface";
 
-export interface VoterEntityInterface extends BaseEntityInterface {
+export interface VoterInterface extends BaseEntityInterface {
     firstname: string;
     middlename: string;
     lastname: string;

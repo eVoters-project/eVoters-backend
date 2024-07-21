@@ -1,9 +1,9 @@
 import { BaseEntity } from "src/abstract/entity/base.entity";
-import { VoterEntityInterface } from "src/interface";
+import { VoterInterface } from "src/interface";
 import { Column, Entity } from "typeorm";
 
 @Entity('setup_voter')
-export class VoterEntity extends BaseEntity implements VoterEntityInterface {
+export class VoterEntity extends BaseEntity implements VoterInterface {
     @Column({ type: 'nvarchar', length: 100 })
     firstname: string;
 

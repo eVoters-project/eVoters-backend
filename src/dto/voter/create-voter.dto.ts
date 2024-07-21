@@ -1,9 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsOptional, IsString } from "class-validator";
 import { format } from "date-fns";
-import { VoterEntityInterface } from "src/interface";
+import { VoterInterface } from "src/interface";
 
-export class CreateVoterDto implements VoterEntityInterface {
+export class CreateVoterDto implements VoterInterface {
 
     @ApiProperty({ default: '' })
     @IsString()

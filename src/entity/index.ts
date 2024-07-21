@@ -9,3 +9,6 @@ export * from './campaign/campaign.entity';
 
 export * from './voter-base/voter-base.entity';
 export * from './voter-influence/voter-influence.entity';
+export * from './voter-position/voter-position.entity';
+export * from './voter-status/voter-status.entity';
+export * from './voter-type/voter-type.entity';

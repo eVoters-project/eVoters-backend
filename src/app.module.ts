@@ -14,6 +14,9 @@ import { VotersModule } from './modules/voters';
 import { VoteCountModule } from './modules/vote-count';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ResponseTransFormInterceptor } from './interceptors';
+import { VoterPositionModule } from './modules/settings/voter-position/voter-position.module';
+import { VoterStatusModule } from './modules/settings/voter-status/voter-status.module';
+import { VoterTypeModule } from './modules/settings/voter-type/voter-type.module';
 
 @Module({
   imports: [
@@ -29,7 +32,10 @@ import { ResponseTransFormInterceptor } from './interceptors';
     GroupTypeModule,
     VoterBaseModule,
     VoterInfluenceModule,
-    VoterInfluenceSubModule
+    VoterInfluenceSubModule,
+    VoterPositionModule,
+    VoterStatusModule,
+    VoterTypeModule
   ],
   controllers: [],
   providers: [
