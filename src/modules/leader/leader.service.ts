@@ -1,5 +1,5 @@
 import { HttpException, Injectable, NotFoundException } from "@nestjs/common";
-import { CreateLeaderDto, UpdateLeaderDto } from "src/dto";
+import { CreateLeaderDto, ResponseLeaderDto, UpdateLeaderDto } from "src/dto";
 import { LeaderEntity } from "src/entity";
 import { DataSource } from "typeorm";
 
@@ -9,15 +9,26 @@ export class LeaderService {
     constructor(private datasource: DataSource) { }
 
     async getAll() {
-        return await this.datasource.manager.find(LeaderEntity);
+        const data = await this.datasource.manager.find(LeaderEntity, {
+            relations: {
+                voter: true,
+                voter_leader: true
+            }
+        });
+        return this.responseDtoArray(data);
     }
 
     async getById(id: string) {
-        return await this.datasource.manager.findOne(LeaderEntity, {
+        const data = await this.datasource.manager.findOne(LeaderEntity, {
+            relations: {
+                voter: true,
+                voter_leader: true
+            },
             where: {
                 id: id
             }
-        })
+        });
+        return this.responseDto(data);
     }
 
     async create(dto: CreateLeaderDto) {
@@ -36,5 +47,29 @@ export class LeaderService {
             return this.datasource.manager.remove(LeaderEntity, leader);
         }
         return new NotFoundException();
+    }
+
+    private responseDto(entity: LeaderEntity): ResponseLeaderDto {
+        return Object.assign(new ResponseLeaderDto(), (({
+            created_at, updated_at, voter, voter_leader, ...leader
+        }) => ({
+            ...leader,
+            voter: (({ id, firstname, middlename, lastname }) => ({ id, firstname, middlename, lastname }))(voter),
+            voter_leader: (({ id, description }) => ({ id, description }))(voter_leader),
+        }))(entity));
+    }
+
+    private responseDtoArray(entity: LeaderEntity[]): ResponseLeaderDto[] {
+        const rDto: ResponseLeaderDto[] = [];
+        entity.forEach(e => {
+            rDto.push(Object.assign(new ResponseLeaderDto(), (({
+                created_at, updated_at, voter, voter_leader, ...leader
+            }) => ({
+                ...leader,
+                voter: (({ id, firstname, middlename, lastname }) => ({ id, firstname, middlename, lastname }))(voter),
+                voter_leader: (({ id, description }) => ({ id, description }))(voter_leader),
+            }))(e)))
+        });
+        return rDto;
     }
 }

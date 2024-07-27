@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { CreateVoterDto, UpdateVoterDto } from "src/dto";
+import { CreateVoterDto, ResponseVoterDto, UpdateVoterDto } from "src/dto";
 import { VoterEntity } from "src/entity";
 import { DataSource } from "typeorm";
 
@@ -8,16 +8,18 @@ export class VotersService {
 
     constructor(private datasource: DataSource) { }
 
-    getVoters() {
-        return this.datasource.manager.find(VoterEntity);
+    async getVoters() {
+        const data = await this.datasource.manager.find(VoterEntity);
+        return this.responseDtoArray(data);
     }
 
-    getVoterById(id: string): Promise<VoterEntity> {
-        return this.datasource.manager.findOne(VoterEntity, {
+    async getVoterById(id: string): Promise<ResponseVoterDto> {
+        const data = await this.datasource.manager.findOne(VoterEntity, {
             where: {
                 id: id
             }
         });
+        return this.responseDto(data);
     }
 
     createVoter(dto: CreateVoterDto) {
@@ -36,6 +38,26 @@ export class VotersService {
         if (voter) {
             return this.datasource.manager.remove(VoterEntity, voter);
         }
+    }
+
+    private responseDto(entity: VoterEntity): ResponseVoterDto {
+        return Object.assign(new ResponseVoterDto(), (({
+            created_at, updated_at, ...rest
+        }) => ({
+            ...rest
+        }))(entity));
+    }
+
+    private responseDtoArray(entity: VoterEntity[]): ResponseVoterDto[] {
+        const rDto: ResponseVoterDto[] = [];
+        entity.forEach(e => {
+            rDto.push(Object.assign(new ResponseVoterDto(), (({
+                created_at, updated_at, ...rest
+            }) => ({
+                ...rest
+            }))(e)))
+        });
+        return rDto;
     }
 
 }
