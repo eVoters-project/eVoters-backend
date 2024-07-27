@@ -1,16 +1,16 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
 import { ApiBody, ApiParam, ApiTags } from "@nestjs/swagger";
-import { LeaderService } from "./leader.service";
-import { CreateLeaderDto, UpdateLeaderDto } from "src/dto";
+import { VoterLeaderSubService } from "./voter-leader-sub.service";
+import { CreateVoterLeaderSubDto, UpdateVoterLeaderSubDto } from "src/dto";
 
-@ApiTags('Leader')
+@ApiTags('Voter Leader Sub')
 @Controller({
-    path: 'leader',
+    path: 'setup-voter-leader-sub',
     version: '1'
 })
-export class LeaderController {
+export class VoterLeaderSubController {
 
-    constructor(private service: LeaderService) { }
+    constructor(private readonly service: VoterLeaderSubService) { }
 
     @Get()
     getAll() {
@@ -28,9 +28,9 @@ export class LeaderController {
 
     @Post()
     @ApiBody({
-        type: CreateLeaderDto
+        type: CreateVoterLeaderSubDto
     })
-    create(@Body() body: CreateLeaderDto) {
+    create(@Body() body: CreateVoterLeaderSubDto) {
         return this.service.create(body);
     }
 
@@ -40,9 +40,9 @@ export class LeaderController {
         required: true
     })
     @ApiBody({
-        type: UpdateLeaderDto
+        type: UpdateVoterLeaderSubDto
     })
-    update(@Param('id') id: string, @Body() body: UpdateLeaderDto) {
+    update(@Param('id') id: string, @Body() body: UpdateVoterLeaderSubDto) {
         return this.service.update(id, body);
     }
 
@@ -54,5 +54,4 @@ export class LeaderController {
     delete(@Param('id') id: string) {
         return this.service.delete(id);
     }
-
 }

@@ -10,8 +10,14 @@ export class PartyEntity extends BaseEntity implements PartyInterface {
     @Column({ type: 'nvarchar', length: 100 })
     code: string;
 
-    @Column({ type: 'nvarchar', length: 255 })
+    @Column({ type: 'nvarchar', length: 150 })
     name: string;
+
+    @Column({ type: 'nvarchar', length: 255 })
+    description: string;
+
+    @Column({ type: 'nvarchar', length: 500 })
+    remarks: string;
 
     @Column({ type: 'nvarchar', length: 50 })
     status: string;

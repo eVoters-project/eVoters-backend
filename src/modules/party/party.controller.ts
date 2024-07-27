@@ -9,11 +9,11 @@ import { PartyService } from "./party.service";
 })
 export class PartyController {
 
-    constructor(private service: PartyService) {}
+    constructor(private service: PartyService) { }
 
     @Get()
-    getParties() {
-        return this.service.getParties();
+    getAll() {
+        return this.service.getAll();
     }
 
     @Get(':id')
@@ -21,8 +21,8 @@ export class PartyController {
         name: 'id',
         required: true
     })
-    getPartyById(@Param('id') id: string) {
-        return this.service.getPartyById(id);
+    getById(@Param('id') id: string) {
+        return this.service.getById(id);
     }
 
     @Delete(':id')
@@ -30,8 +30,8 @@ export class PartyController {
         name: 'id',
         required: true
     })
-    deleteParty(@Param('id') id: string) {
-        return this.service.deleteParty(id);
+    delete(@Param('id') id: string) {
+        return this.service.delete(id);
     }
-    
+
 }

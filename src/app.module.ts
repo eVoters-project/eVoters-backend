@@ -3,7 +3,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { LoggingMiddleware } from './middleware';
 
 import { AuthModule } from './modules/auth';
-import { GroupTypeModule, UserModule, VoterBaseModule, VoterInfluenceModule, VoterInfluenceSubModule } from './modules/settings';
+import { GroupTypeModule, UserModule, VoterBaseModule, VoterInfluenceModule, VoterInfluenceSubModule, VoterLeaderModule, VoterLeaderSubModule } from './modules/settings';
 
 import { DashboardModule } from './modules/dashboard';
 import { CampaignModule } from './modules/campaign';
@@ -35,7 +35,9 @@ import { VoterTypeModule } from './modules/settings/voter-type/voter-type.module
     VoterInfluenceSubModule,
     VoterPositionModule,
     VoterStatusModule,
-    VoterTypeModule
+    VoterTypeModule,
+    VoterLeaderModule,
+    VoterLeaderSubModule
   ],
   controllers: [],
   providers: [

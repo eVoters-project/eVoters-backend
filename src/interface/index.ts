@@ -15,3 +15,5 @@ export * from './entity/voter-influence-sub/voter-influence-sub.interface';
 export * from './entity/voter-position/voter-positon.interface';
 export * from './entity/voter-status/voter-status.interface';
 export * from './entity/voter-type/voter-type.interface';
+export * from './entity/voter-leader/voter-leader.interface';
+export * from './entity/voter-leader-sub/voter-leader-sub.interface';
