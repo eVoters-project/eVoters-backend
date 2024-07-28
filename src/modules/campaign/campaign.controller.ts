@@ -1,6 +1,8 @@
-import { Controller, Delete, Get, Param } from "@nestjs/common";
-import { ApiParam, ApiTags } from "@nestjs/swagger";
+import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
+import { ApiBody, ApiParam, ApiTags } from "@nestjs/swagger";
 import { CampaignService } from "./campaign.service";
+import { CreateCampaignDto } from "src/dto/campaign/create-campaign.dto";
+import { UpdateCampaignDto } from "src/dto/campaign/update-campaign.dto";
 
 @ApiTags('Campaign')
 @Controller({
@@ -9,11 +11,11 @@ import { CampaignService } from "./campaign.service";
 })
 export class CampaignController {
 
-    constructor(private service: CampaignService) {}
+    constructor(private service: CampaignService) { }
 
     @Get()
     getCampaigns() {
-        return this.service.getCampaigns();
+        return this.service.getAll();
     }
 
     @Get(':id')
@@ -22,7 +24,27 @@ export class CampaignController {
         required: true
     })
     getCampaignById(@Param('id') id: string) {
-        return this.service.getCampaignById(id);
+        return this.service.getById(id);
+    }
+
+    @Post()
+    @ApiBody({
+        type: CreateCampaignDto
+    })
+    create(@Body() body: CreateCampaignDto) {
+        return this.service.create(body);
+    }
+
+    @Patch(':id')
+    @ApiParam({
+        name: 'id',
+        required: true
+    })
+    @ApiBody({
+        type: UpdateCampaignDto
+    })
+    update(@Param('id') id: string, @Body() body: UpdateCampaignDto) {
+        return this.service.update(id, body);
     }
 
     @Delete(':id')
@@ -31,7 +53,7 @@ export class CampaignController {
         required: true
     })
     deleteCampaign(@Param('id') id: string) {
-        return this.service.deleteCampaign(id);
+        return this.service.delete(id);
     }
 
 }

@@ -50,3 +50,7 @@ export * from './area-province/response-area-province.dto';
 export * from './area-region/create-area-region.dto';
 export * from './area-region/update-area-region.dto';
 export * from './area-region/response-area-region.dto';
+
+export * from './party/create-party.dto';
+export * from './party/update-party.dto';
+export * from './party/response-party.dto';

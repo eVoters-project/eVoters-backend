@@ -1,6 +1,7 @@
-import { Controller, Delete, Get, Param } from "@nestjs/common";
-import { ApiParam, ApiTags } from "@nestjs/swagger";
+import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
+import { ApiBody, ApiParam, ApiTags } from "@nestjs/swagger";
 import { PartyService } from "./party.service";
+import { CreatePartyDto, UpdatePartyDto } from "src/dto";
 
 @ApiTags('Party')
 @Controller({
@@ -24,6 +25,27 @@ export class PartyController {
     getById(@Param('id') id: string) {
         return this.service.getById(id);
     }
+
+    @Post()
+    @ApiBody({
+        type: CreatePartyDto
+    })
+    create(@Body() body: CreatePartyDto) {
+        return this.service.create(body);
+    }
+
+    @Patch(':id')
+    @ApiParam({
+        name: 'id',
+        required: true
+    })
+    @ApiBody({
+        type: UpdatePartyDto
+    })
+    update(@Param('id') id: string, @Body() body: UpdatePartyDto) {
+        return this.service.update(id, body);
+    }
+
 
     @Delete(':id')
     @ApiParam({
