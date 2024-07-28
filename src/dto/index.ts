@@ -34,3 +34,19 @@ export * from './voter-leader/query-voter-leader.dto';
 export * from './voter-leader-sub/create-voter-leader-sub.dto';
 export * from './voter-leader-sub/update-voter-leader-sub.dto';
 export * from './voter-leader-sub/response-voter-leader-sub.dto';
+
+export * from './area-barangay/create-area-barangay.dto';
+export * from './area-barangay/update-area-barangay.dto';
+export * from './area-barangay/response-area-barangay.dto';
+
+export * from './area-lgu/create-area-lgu.dto';
+export * from './area-lgu/update-area-lgu.dto';
+export * from './area-lgu/response-area-lgu.dto';
+
+export * from './area-province/create-area-province.dto';
+export * from './area-province/update-area-province.dto';
+export * from './area-province/response-area-province.dto';
+
+export * from './area-region/create-area-region.dto';
+export * from './area-region/update-area-region.dto';
+export * from './area-region/response-area-region.dto';

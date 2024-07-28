@@ -41,10 +41,18 @@ export class LeaderService {
     }
 
     async delete(id: string) {
-        var leader = await this.getById(id);
+        const data = await this.datasource.manager.findOne(LeaderEntity, {
+            relations: {
+                voter: true,
+                voter_leader: true
+            },
+            where: {
+                id: id
+            }
+        });
 
-        if (leader) {
-            return this.datasource.manager.remove(LeaderEntity, leader);
+        if (data) {
+            return this.datasource.manager.remove(LeaderEntity, data);
         }
         return new NotFoundException();
     }
@@ -54,8 +62,8 @@ export class LeaderService {
             created_at, updated_at, voter, voter_leader, ...leader
         }) => ({
             ...leader,
-            voter: (({ id, firstname, middlename, lastname }) => ({ id, firstname, middlename, lastname }))(voter),
-            voter_leader: (({ id, description }) => ({ id, description }))(voter_leader),
+            voter: (({ id, firstname, middlename, lastname }) => `${firstname} ${middlename} ${lastname}`)(voter),
+            voter_leader: (({ description }) => description)(voter_leader),
         }))(entity));
     }
 
@@ -66,8 +74,8 @@ export class LeaderService {
                 created_at, updated_at, voter, voter_leader, ...leader
             }) => ({
                 ...leader,
-                voter: (({ id, firstname, middlename, lastname }) => ({ id, firstname, middlename, lastname }))(voter),
-                voter_leader: (({ id, description }) => ({ id, description }))(voter_leader),
+                voter: (({ firstname, middlename, lastname }) => `${firstname} ${middlename} ${lastname}`)(voter),
+                voter_leader: (({ description }) => description)(voter_leader),
             }))(e)))
         });
         return rDto;

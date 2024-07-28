@@ -1,8 +1,8 @@
 import { LeaderInterface, VoterInterface, VoterLeaderInterface } from "src/interface";
 
-export class ResponseLeaderDto implements LeaderInterface {
+export class ResponseLeaderDto {
     id?: string;
-    voter: VoterInterface;
-    voter_leader: VoterLeaderInterface;
+    voter: string;
+    voter_leader: string;
     status: string;
 }

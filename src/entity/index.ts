@@ -12,3 +12,8 @@ export * from './voter-influence/voter-influence.entity';
 export * from './voter-position/voter-position.entity';
 export * from './voter-status/voter-status.entity';
 export * from './voter-type/voter-type.entity';
+
+export * from './area-barangay/area-barangay.entity';
+export * from './area-lgu/area-lgu.entity';
+export * from './area-province/area-province.entity';
+export * from './area-region/area-region.entity';

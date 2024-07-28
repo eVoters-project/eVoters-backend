@@ -17,3 +17,8 @@ export * from './entity/voter-status/voter-status.interface';
 export * from './entity/voter-type/voter-type.interface';
 export * from './entity/voter-leader/voter-leader.interface';
 export * from './entity/voter-leader-sub/voter-leader-sub.interface';
+
+export * from './entity/area-barangay/area-barangay.interface';
+export * from './entity/area-lgu/area-lgu.interface';
+export * from './entity/area-province/area-province.interface';
+export * from './entity/area-region/area-region.interface';
