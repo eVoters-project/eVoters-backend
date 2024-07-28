@@ -10,3 +10,5 @@ export * from './area-barangay/area-barangay.module';
 export * from './area-lgu/area-lgu.module';
 export * from './area-province/area-province.module';
 export * from './area-region/area-region.module';
+
+export * from './position/position.module';

@@ -3,7 +3,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { LoggingMiddleware } from './middleware';
 
 import { AuthModule } from './modules/auth';
-import { AreaBarangayModule, AreaLGUModule, AreaProvinceModule, AreaRegionModule, GroupTypeModule, UserModule, VoterBaseModule, VoterInfluenceModule, VoterInfluenceSubModule, VoterLeaderModule, VoterLeaderSubModule } from './modules/settings';
+import { AreaBarangayModule, AreaLGUModule, AreaProvinceModule, AreaRegionModule, GroupTypeModule, PositionModule, UserModule, VoterBaseModule, VoterInfluenceModule, VoterInfluenceSubModule, VoterLeaderModule, VoterLeaderSubModule } from './modules/settings';
 
 import { DashboardModule } from './modules/dashboard';
 import { CampaignModule } from './modules/campaign';
@@ -17,6 +17,7 @@ import { ResponseTransFormInterceptor } from './interceptors';
 import { VoterPositionModule } from './modules/settings/voter-position/voter-position.module';
 import { VoterStatusModule } from './modules/settings/voter-status/voter-status.module';
 import { VoterTypeModule } from './modules/settings/voter-type/voter-type.module';
+import { AreaPurokModule } from './modules/settings/area-purok/area-purok.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { VoterTypeModule } from './modules/settings/voter-type/voter-type.module
     VotersModule,
     UserModule,
     GroupTypeModule,
+    PositionModule,
     VoterBaseModule,
     VoterInfluenceModule,
     VoterInfluenceSubModule,
@@ -38,10 +40,11 @@ import { VoterTypeModule } from './modules/settings/voter-type/voter-type.module
     VoterTypeModule,
     VoterLeaderModule,
     VoterLeaderSubModule,
+    AreaPurokModule,
     AreaBarangayModule,
     AreaLGUModule,
     AreaProvinceModule,
-    AreaRegionModule
+    AreaRegionModule,
   ],
   controllers: [],
   providers: [

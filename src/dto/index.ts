@@ -54,3 +54,11 @@ export * from './area-region/response-area-region.dto';
 export * from './party/create-party.dto';
 export * from './party/update-party.dto';
 export * from './party/response-party.dto';
+
+export * from './area-purok/create-area-purok.dto';
+export * from './area-purok/update-area-purok.dto';
+export * from './area-purok/response-area-purok.dto';
+
+export * from './position/create-position.dto';
+export * from './position/update-position.dto';
+export * from './position/response-position.dto';
