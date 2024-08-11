@@ -1,6 +1,8 @@
-import { VoterInterface } from "src/interface";
+import { AreaBarangayInterface, AreaPurokInterface, VoterInterface } from "src/interface";
 
 export class ResponseVoterDto implements VoterInterface {
+    created_at?: Date;
+    updated_at?: Date;
     firstname: string;
     middlename: string;
     lastname: string;
@@ -18,4 +20,9 @@ export class ResponseVoterDto implements VoterInterface {
     longitude: string;
     latitude: string;
     id?: string;
+    barangay: AreaBarangayInterface;
+    purok: AreaPurokInterface;
+    verified_voter: boolean;
+    confirmed_leader: boolean;
+    unassigned_voter: boolean;
 }

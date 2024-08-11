@@ -42,9 +42,12 @@ export class VotersService {
 
     private responseDto(entity: VoterEntity): ResponseVoterDto {
         return Object.assign(new ResponseVoterDto(), (({
-            created_at, updated_at, ...rest
+            created_at, updated_at, verified_voter, confirmed_leader, unassigned_voter, ...rest
         }) => ({
-            ...rest
+            ...rest,
+            verified: verified_voter,
+            confirmed: confirmed_leader,
+            unassigned: unassigned_voter
         }))(entity));
     }
 
@@ -52,9 +55,12 @@ export class VotersService {
         const rDto: ResponseVoterDto[] = [];
         entity.forEach(e => {
             rDto.push(Object.assign(new ResponseVoterDto(), (({
-                created_at, updated_at, ...rest
+                created_at, updated_at, verified_voter, confirmed_leader, unassigned_voter, ...rest
             }) => ({
-                ...rest
+                ...rest,
+                verified: verified_voter,
+                confirmed: confirmed_leader,
+                unassigned: unassigned_voter
             }))(e)))
         });
         return rDto;

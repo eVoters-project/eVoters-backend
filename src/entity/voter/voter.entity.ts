@@ -1,6 +1,8 @@
 import { BaseEntity } from "src/abstract/entity/base.entity";
 import { VoterInterface } from "src/interface";
-import { Column, Entity } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
+import { AreaBarangayEntity } from "../area-barangay/area-barangay.entity";
+import { AreaPurokEntity } from "../area-purok/area-purok.entity";
 
 @Entity('setup_voter')
 export class VoterEntity extends BaseEntity implements VoterInterface {
@@ -52,4 +54,18 @@ export class VoterEntity extends BaseEntity implements VoterInterface {
     @Column({ type: 'nvarchar', length: 100 })
     longitude: string;
 
+    @ManyToOne(() => AreaBarangayEntity, e => e.id)
+    barangay: AreaBarangayEntity;
+
+    @ManyToOne(() => AreaPurokEntity, e => e.id)
+    purok: AreaPurokEntity;
+
+    @Column({ type: 'boolean' })
+    verified_voter: boolean;
+
+    @Column({ type: 'boolean' })
+    confirmed_leader: boolean;
+
+    @Column({ type: 'boolean' })
+    unassigned_voter: boolean;
 }

@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsOptional, IsString } from "class-validator";
+import { IsBoolean, IsObject, IsOptional, IsString } from "class-validator";
 import { format } from "date-fns";
-import { VoterInterface } from "src/interface";
+import { AreaBarangayInterface, AreaPurokInterface, VoterInterface } from "src/interface";
 
 export class CreateVoterDto implements VoterInterface {
 
@@ -84,4 +84,26 @@ export class CreateVoterDto implements VoterInterface {
     @IsString()
     @IsOptional()
     longitude: string;
+
+    @ApiProperty({ default: { id: '' } })
+    @IsObject()
+    @IsOptional()
+    barangay: AreaBarangayInterface;
+
+    @ApiProperty({ default: { id: '' } })
+    @IsObject()
+    @IsOptional()
+    purok: AreaPurokInterface;
+
+    @ApiProperty({ default: false })
+    @IsBoolean()
+    verified_voter: boolean;
+
+    @ApiProperty({ default: false })
+    @IsBoolean()
+    confirmed_leader: boolean;
+
+    @ApiProperty({ default: false })
+    @IsBoolean()
+    unassigned_voter: boolean;
 }
