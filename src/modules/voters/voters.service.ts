@@ -9,7 +9,16 @@ export class VotersService {
     constructor(private datasource: DataSource) { }
 
     async getVoters() {
-        const data = await this.datasource.manager.find(VoterEntity);
+        const data = await this.datasource.manager.find(VoterEntity, {
+            relations: {
+                barangay: true,
+                purok: true,
+                vote_group: true,
+                parties: {
+                    party: true
+                }
+            }
+        });
         return this.responseDtoArray(data);
     }
 
@@ -33,7 +42,11 @@ export class VotersService {
     }
 
     async deleteVoter(id: string) {
-        var voter = await this.getVoterById(id);
+        var voter = await this.datasource.manager.findOne(VoterEntity, {
+            where: {
+                id: id
+            }
+        });
 
         if (voter) {
             return this.datasource.manager.remove(VoterEntity, voter);
@@ -42,12 +55,9 @@ export class VotersService {
 
     private responseDto(entity: VoterEntity): ResponseVoterDto {
         return Object.assign(new ResponseVoterDto(), (({
-            created_at, updated_at, verified_voter, confirmed_leader, unassigned_voter, ...rest
+            created_at, updated_at, ...rest
         }) => ({
-            ...rest,
-            verified: verified_voter,
-            confirmed: confirmed_leader,
-            unassigned: unassigned_voter
+            ...rest
         }))(entity));
     }
 
@@ -57,7 +67,17 @@ export class VotersService {
             rDto.push(Object.assign(new ResponseVoterDto(), (({
                 created_at, updated_at, verified_voter, confirmed_leader, unassigned_voter, ...rest
             }) => ({
-                ...rest,
+                id: rest.id,
+                precinct_no: rest.precinct_no,
+                lastname: rest.lastname,
+                firstname_middlename: `${rest?.firstname} ${rest?.middlename}`,
+                latitude: rest.latitude,
+                longitude: rest.longitude,
+                barangay: rest.barangay?.name,
+                purok: rest.purok?.name,
+                party: rest.parties.map(x => x.party.name).join(', '),
+                group: rest.vote_group?.name,
+                vote_status: rest.vote_status,
                 verified: verified_voter,
                 confirmed: confirmed_leader,
                 unassigned: unassigned_voter

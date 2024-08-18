@@ -62,3 +62,7 @@ export * from './area-purok/response-area-purok.dto';
 export * from './position/create-position.dto';
 export * from './position/update-position.dto';
 export * from './position/response-position.dto';
+
+export * from './group-type/create-group-type.dto';
+export * from './group-type/response-group-type.dto';
+export * from './group-type/update-group-type.dto';

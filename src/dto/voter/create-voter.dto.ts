@@ -1,7 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsBoolean, IsObject, IsOptional, IsString } from "class-validator";
+import { IsArray, IsBoolean, IsObject, IsOptional, IsString } from "class-validator";
 import { format } from "date-fns";
-import { AreaBarangayInterface, AreaPurokInterface, VoterInterface } from "src/interface";
+import { AreaBarangayInterface, AreaPurokInterface, PartyInterface, VoterInterface } from "src/interface";
+import { GroupTypeEntityInterface } from "src/interface/entity/group-type/group-type.entity.interface";
+import { PartyMemberInterface } from "src/interface/entity/party-member/party-member.interface";
 
 export class CreateVoterDto implements VoterInterface {
 
@@ -61,9 +63,9 @@ export class CreateVoterDto implements VoterInterface {
     category: string;
 
     @ApiProperty({ default: '' })
-    @IsString()
+    @IsObject()
     @IsOptional()
-    vote_group: string;
+    vote_group: GroupTypeEntityInterface;
 
     @ApiProperty({ default: '' })
     @IsString()
@@ -94,6 +96,11 @@ export class CreateVoterDto implements VoterInterface {
     @IsObject()
     @IsOptional()
     purok: AreaPurokInterface;
+
+    @ApiProperty({ default: { id: '' } })
+    @IsArray()
+    @IsOptional()
+    parties: PartyMemberInterface[];
 
     @ApiProperty({ default: false })
     @IsBoolean()

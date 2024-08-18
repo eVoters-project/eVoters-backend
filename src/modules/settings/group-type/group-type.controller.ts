@@ -5,10 +5,10 @@ import { CreateGroupTypeDto } from "src/dto/group-type/create-group-type.dto";
 import { UpdateGroupTypeDto } from "src/dto/group-type/update-group-type.dto";
 
 @ApiTags('Group Type')
-@Controller({ path: 'settings-group-type', version: '1' })
+@Controller({ path: 'setup-group-type', version: '1' })
 export class GroupTypeController {
 
-    constructor(private readonly service: GroupTypeService) {}
+    constructor(private readonly service: GroupTypeService) { }
 
     @Get()
     getGroupTypes() {

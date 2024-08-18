@@ -1,5 +1,4 @@
 import { BaseEntity } from "src/abstract/entity/base.entity";
-import { VoterInterface, PartyInterface } from "src/interface";
 import { PartyMemberInterface } from "src/interface/entity/party-member/party-member.interface";
 import { Column, Entity, ManyToOne } from "typeorm";
 import { VoterEntity } from "../voter/voter.entity";

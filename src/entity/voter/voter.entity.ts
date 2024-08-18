@@ -1,8 +1,10 @@
 import { BaseEntity } from "src/abstract/entity/base.entity";
 import { VoterInterface } from "src/interface";
-import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm";
 import { AreaBarangayEntity } from "../area-barangay/area-barangay.entity";
 import { AreaPurokEntity } from "../area-purok/area-purok.entity";
+import { PartyMemberEntity } from "../party-member/party-member.entity";
+import { GroupTypeEntity } from "../group-type/group-type.entity";
 
 @Entity('setup_voter')
 export class VoterEntity extends BaseEntity implements VoterInterface {
@@ -39,8 +41,8 @@ export class VoterEntity extends BaseEntity implements VoterInterface {
     @Column({ type: 'nvarchar', length: 50 })
     category: string;
 
-    @Column({ type: 'nvarchar', length: 50 })
-    vote_group: string;
+    @ManyToOne(() => GroupTypeEntity, e => e.id)
+    vote_group: GroupTypeEntity;
 
     @Column({ type: 'nvarchar', length: 50 })
     vote_type: string;
@@ -59,6 +61,9 @@ export class VoterEntity extends BaseEntity implements VoterInterface {
 
     @ManyToOne(() => AreaPurokEntity, e => e.id)
     purok: AreaPurokEntity;
+
+    @OneToMany(() => PartyMemberEntity, e => e.voter)
+    parties: PartyMemberEntity[];
 
     @Column({ type: 'boolean' })
     verified_voter: boolean;

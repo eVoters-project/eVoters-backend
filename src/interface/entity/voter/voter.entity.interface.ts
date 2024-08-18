@@ -1,6 +1,9 @@
 import { BaseEntityInterface } from "src/interface/abstract/entity/base.entity.interface";
 import { AreaBarangayInterface } from "../area-barangay/area-barangay.interface";
 import { AreaPurokInterface } from "../area-purok/area-purok.interface";
+import { PartyInterface } from "../party/party.entity.interface";
+import { PartyMemberInterface } from "../party-member/party-member.interface";
+import { GroupTypeEntityInterface } from "../group-type/group-type.entity.interface";
 
 export interface VoterInterface extends BaseEntityInterface {
     firstname: string;
@@ -14,13 +17,14 @@ export interface VoterInterface extends BaseEntityInterface {
     vin_no: string;
     status: string;
     category: string;
-    vote_group: string;
+    vote_group: GroupTypeEntityInterface;
     vote_type: string;
     vote_status: string;
     longitude: string;
     latitude: string;
     barangay: AreaBarangayInterface;
     purok: AreaPurokInterface;
+    parties: PartyMemberInterface[];
     verified_voter?: boolean;
     confirmed_leader?: boolean;
     unassigned_voter?: boolean;
