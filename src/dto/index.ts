@@ -66,3 +66,11 @@ export * from './position/response-position.dto';
 export * from './group-type/create-group-type.dto';
 export * from './group-type/response-group-type.dto';
 export * from './group-type/update-group-type.dto';
+
+export * from './election-schedule/create-election-schedule.dto';
+export * from './election-schedule/update-election-schedule.dto';
+export * from './election-schedule/response-election-schedule.dto';
+
+export * from './election-schedule-position/create-election-schedule-position.dto';
+export * from './election-schedule-position/update-election-schedule-position.dto';
+export * from './election-schedule-position/response-election-schedule-position.dto';

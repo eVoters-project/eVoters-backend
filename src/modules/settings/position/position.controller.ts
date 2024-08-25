@@ -1,5 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
-import { ApiBody, ApiParam, ApiTags } from "@nestjs/swagger";
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from "@nestjs/common";
+import { ApiBody, ApiParam, ApiQuery, ApiTags } from "@nestjs/swagger";
 import { PositionService } from "./position.service";
 import { CreatePositionDto, UpdatePositionDto } from "src/dto";
 
@@ -13,7 +13,20 @@ export class PositionController {
     constructor(private readonly service: PositionService) { }
 
     @Get()
-    getAll() {
+    @ApiQuery({
+        name: 'level',
+        required: false,
+        enum: ['National', 'Local']
+    })
+    @ApiQuery({
+        name: 'election_cycle',
+        required: false,
+        enum: ['Presidential', 'Midterm']
+    })
+    getAll(@Query() query: any) {
+        if (Object.keys(query).length > 0) {
+            return this.service.getByQuery(query);
+        }
         return this.service.getAll();
     }
 

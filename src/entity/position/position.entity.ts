@@ -4,6 +4,9 @@ import { Column, Entity } from "typeorm";
 
 @Entity('setup_position')
 export class PositionEntity extends BaseEntity implements PositionInterface {
+    @Column({ type: 'smallint' })
+    sequence: number;
+
     @Column({ type: 'nvarchar', length: 100 })
     code: string;
 
@@ -12,6 +15,12 @@ export class PositionEntity extends BaseEntity implements PositionInterface {
 
     @Column({ type: 'nvarchar', length: 500 })
     description: string;
+
+    @Column({ type: 'nvarchar', length: 50 })
+    level: string;
+
+    @Column({ type: 'nvarchar', length: 50 })
+    election_cycle: string;
 
     @Column({ type: 'nvarchar', length: 50 })
     status: string;

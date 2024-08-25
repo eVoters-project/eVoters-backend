@@ -35,7 +35,7 @@ async function bootstrap() {
     .setTitle('E - Voters API')
     .setDescription('Api for E - Voters App')
     .setVersion('')
-    .addTag('')
+    // .addTag('Election Schedule', 'Yearly Election Schedule as per COMELEC')
     .addBearerAuth()
     .build();
 
@@ -44,10 +44,10 @@ async function bootstrap() {
 
   // 
   SwaggerModule.setup('docs/swagger', app, document);
-  
+
   // 
   await app.listen(3000);
-  
+
 }
 
 bootstrap();

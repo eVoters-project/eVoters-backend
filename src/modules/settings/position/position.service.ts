@@ -9,7 +9,25 @@ export class PositionService {
     constructor(private readonly datasource: DataSource) { }
 
     async getAll() {
-        const data = await this.datasource.manager.find(PositionEntity);
+        const data = await this.datasource.manager.find(PositionEntity, {
+            order: {
+                sequence: 'ASC'
+            }
+        });
+        return this.responseDtoArray(data);
+    }
+
+    async getByQuery(query: any) {
+        const { level, election_cycle } = query;
+        const data = await this.datasource.manager.find(PositionEntity, {
+            where: {
+                level: level,
+                election_cycle: election_cycle
+            },
+            order: {
+                sequence: 'ASC'
+            }
+        });
         return this.responseDtoArray(data);
     }
 

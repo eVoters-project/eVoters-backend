@@ -18,6 +18,7 @@ import { VoterPositionModule } from './modules/settings/voter-position/voter-pos
 import { VoterStatusModule } from './modules/settings/voter-status/voter-status.module';
 import { VoterTypeModule } from './modules/settings/voter-type/voter-type.module';
 import { AreaPurokModule } from './modules/settings/area-purok/area-purok.module';
+import { ElectionScheduleModule } from './modules/settings/election-schedule/election-schedule.module';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { AreaPurokModule } from './modules/settings/area-purok/area-purok.module
     AreaLGUModule,
     AreaProvinceModule,
     AreaRegionModule,
+    ElectionScheduleModule
   ],
   controllers: [],
   providers: [
