@@ -74,3 +74,8 @@ export * from './election-schedule/response-election-schedule.dto';
 export * from './election-schedule-position/create-election-schedule-position.dto';
 export * from './election-schedule-position/update-election-schedule-position.dto';
 export * from './election-schedule-position/response-election-schedule-position.dto';
+
+export * from './campaign/create-campaign.dto';
+export * from './campaign/update-campaign.dto';
+export * from './campaign/response-campaign.dto';
+export * from './campaign/send-sms-campaign.dto';

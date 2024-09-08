@@ -29,6 +29,9 @@ export class VoterEntity extends BaseEntity implements VoterInterface {
     @Column({ type: 'nvarchar', length: 250 })
     address: string;
 
+    @Column({ type: 'nvarchar', length: 12 })
+    mobile_no: string;
+
     @Column({ type: 'nvarchar', length: 50 })
     precinct_no: string;
 

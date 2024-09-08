@@ -3,6 +3,7 @@ import { ApiBody, ApiParam, ApiTags } from "@nestjs/swagger";
 import { CampaignService } from "./campaign.service";
 import { CreateCampaignDto } from "src/dto/campaign/create-campaign.dto";
 import { UpdateCampaignDto } from "src/dto/campaign/update-campaign.dto";
+import { SendSMSCampaignDto } from "src/dto";
 
 @ApiTags('Campaign')
 @Controller({
@@ -54,6 +55,14 @@ export class CampaignController {
     })
     deleteCampaign(@Param('id') id: string) {
         return this.service.delete(id);
+    }
+
+    @Post('send-sms-campaign')
+    @ApiBody({
+        type: SendSMSCampaignDto
+    })
+    sendSMS(@Body() body: SendSMSCampaignDto) {
+        return this.service.sendSMS(body);
     }
 
 }

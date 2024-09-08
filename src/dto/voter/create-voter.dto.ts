@@ -42,6 +42,11 @@ export class CreateVoterDto implements VoterInterface {
     @IsOptional()
     address: string;
 
+    @ApiProperty({ default: '+63' })
+    @IsString()
+    @IsOptional()
+    mobile_no: string;
+
     @ApiProperty({ default: '' })
     @IsString()
     @IsOptional()

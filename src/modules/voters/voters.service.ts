@@ -71,6 +71,7 @@ export class VotersService {
                 precinct_no: rest.precinct_no,
                 lastname: rest.lastname,
                 firstname_middlename: `${rest?.firstname} ${rest?.middlename}`,
+                mobile_no: rest?.mobile_no,
                 latitude: rest.latitude,
                 longitude: rest.longitude,
                 barangay: rest.barangay?.name,

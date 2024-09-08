@@ -1,4 +1,6 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable, NotFoundException } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { SendSMSCampaignDto } from "src/dto";
 import { CreateCampaignDto } from "src/dto/campaign/create-campaign.dto";
 import { ResponseCampaignDto } from "src/dto/campaign/response-campaign.dto";
 import { UpdateCampaignDto } from "src/dto/campaign/update-campaign.dto";
@@ -8,7 +10,9 @@ import { DataSource } from "typeorm";
 @Injectable()
 export class CampaignService {
 
-    constructor(private datasource: DataSource) { }
+    private apiKey = this.config.get<string>('SMP_APIKEY');
+
+    constructor(private datasource: DataSource, private readonly config: ConfigService) { }
 
     async getAll() {
         const data = await this.datasource.manager.find(CampaignEntity);
@@ -45,6 +49,38 @@ export class CampaignService {
             return this.datasource.manager.remove(CampaignEntity, campaign);
         }
         return NotFoundException;
+    }
+
+    async sendSMS(dto: SendSMSCampaignDto) {
+        const { number, message } = dto;
+
+        const parameters = {
+            apikey: this.apiKey,
+            number: number.join(', '),
+            message
+        }; console.log(parameters)
+
+        return fetch('https://api.semaphore.co/api/v4/messages', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams(parameters)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new HttpException('Error sending SMS', HttpStatus.BAD_REQUEST)
+                }
+                return response.json();
+            })
+            .then(() => {
+                return {
+                    message: 'SMS message sent'
+                }
+            })
+            .catch(err => {
+                throw new HttpException(err, HttpStatus.BAD_REQUEST);
+            });
     }
 
     private responseDto(entity: CampaignEntity): ResponseCampaignDto {

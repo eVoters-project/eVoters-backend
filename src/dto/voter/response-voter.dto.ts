@@ -5,6 +5,7 @@ export class ResponseVoterDto {
     precinct_no: string;
     lastname: string;
     firstname_middlename: string;
+    mobile_no: string;
     longitude: string;
     latitude: string;
     barangay: AreaBarangayInterface;

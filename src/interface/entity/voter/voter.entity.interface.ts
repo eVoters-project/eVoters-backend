@@ -13,6 +13,7 @@ export interface VoterInterface extends BaseEntityInterface {
     gender: string;
     date_of_birth: Date;
     address: string;
+    mobile_no: string;
     precinct_no: string;
     vin_no: string;
     status: string;
