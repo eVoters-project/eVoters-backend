@@ -17,3 +17,8 @@ export * from './area-barangay/area-barangay.entity';
 export * from './area-lgu/area-lgu.entity';
 export * from './area-province/area-province.entity';
 export * from './area-region/area-region.entity';
+
+export * from './election-schedule/election-schedule.entity';
+export * from './election-schedule-candidate/election-schedule-candidate.entity';
+export * from './election-schedule-candidate-vote-count/election-schedule-candidate-vote-count.entity';
+export * from './election-schedule-position/election-schedule-position.entity';

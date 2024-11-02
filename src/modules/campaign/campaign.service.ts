@@ -58,7 +58,7 @@ export class CampaignService {
             apikey: this.apiKey,
             number: number.join(', '),
             message
-        }; console.log(parameters)
+        };
 
         return fetch('https://api.semaphore.co/api/v4/messages', {
             method: 'POST',
