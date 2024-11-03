@@ -79,3 +79,7 @@ export * from './campaign/create-campaign.dto';
 export * from './campaign/update-campaign.dto';
 export * from './campaign/response-campaign.dto';
 export * from './campaign/send-sms-campaign.dto';
+
+export * from './election-position/create-election-position.dto';
+export * from './election-position/response-election-position.dto';
+export * from './election-position/update-election-position.dto';

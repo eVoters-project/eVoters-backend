@@ -23,3 +23,13 @@ export * from './entity/area-barangay/area-barangay.interface';
 export * from './entity/area-lgu/area-lgu.interface';
 export * from './entity/area-province/area-province.interface';
 export * from './entity/area-region/area-region.interface';
+
+export * from './entity/election-position/election-position.interface';
+export * from './entity/election-schedule/election-schedule.interface';
+export * from './entity/election-schedule-candidate/election-schedule-candidate.interface';
+export * from './entity/election-schedule-candidate-vote-count/election-schedule-candidate-vote-count.interface';
+export * from './entity/election-schedule-position/election-schedule-position.interface';
+export * from './entity/election-survey-tally/election-survey-tally.interface';
+export * from './entity/election-survey-tally-count/election-survey-tally-count.interface';
+export * from './entity/election-tally/election-tally.interface';
+export * from './entity/election-tally-count/election-tally-count.interface';
