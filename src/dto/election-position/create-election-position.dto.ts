@@ -1,25 +1,28 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsInt, IsString } from "class-validator";
-import { ElectionPositionInterface } from "src/interface";
+import { IsInt, IsObject, IsString } from "class-validator";
+import { ElectionPositionInterface, ElectionScheduleInterface } from "src/interface";
+import { PositionInterface } from "src/interface/entity/position/position.interface";
 
 export class CreateElectionPositionDto implements ElectionPositionInterface {
-    @ApiProperty({ default: 0 })
+
+    @ApiProperty({ default: 1 })
     @IsInt()
     sequence: number;
 
-    @ApiProperty({ default: '' })
-    @IsString()
-    code: string;
+    @ApiProperty({ default: 1 })
+    @IsInt()
+    seat: number;
 
     @ApiProperty({ default: '' })
     @IsString()
-    name: string;
+    remarks: string;
 
-    @ApiProperty({ default: '' })
-    @IsString()
-    description: string;
+    @ApiProperty({ default: { id: '' } })
+    @IsObject()
+    position: PositionInterface;
 
-    @ApiProperty({ default: 'Active' })
-    @IsString()
-    status: string;
+    @ApiProperty({ default: { id: '' } })
+    @IsObject()
+    election_schedule: ElectionScheduleInterface;
+
 }

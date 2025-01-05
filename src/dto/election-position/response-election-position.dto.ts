@@ -1,6 +1,6 @@
 export class ResponseElectionPositionDto {
     id: string;
     name: string;
-    description: string;
-    status: string;
+    seat: number
+    remarks: string;
 }

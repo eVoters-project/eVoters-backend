@@ -21,6 +21,9 @@ import { AreaPurokModule } from './modules/settings/area-purok/area-purok.module
 import { ElectionScheduleModule } from './modules/settings/election-schedule/election-schedule.module';
 import { ElectionPositionModule } from './modules/settings/election-position/election-position.module';
 import { ElectionPrecinctModule } from './modules/settings/election-precinct/election-precinct.module';
+import { ElectionCandidateModule } from './modules/settings/election-candidate/election-candidate.module';
+import { ElectionTallyModule } from './modules/election-tally/election-tally.module';
+import { PartyMemberModule } from './modules/party-member/party-member.module';
 
 @Module({
   imports: [
@@ -29,6 +32,7 @@ import { ElectionPrecinctModule } from './modules/settings/election-precinct/ele
     CampaignModule,
     LeaderModule,
     PartyModule,
+    PartyMemberModule,
     VoteCountModule,
     StrawVoteModule,
     VotersModule,
@@ -50,7 +54,10 @@ import { ElectionPrecinctModule } from './modules/settings/election-precinct/ele
     AreaRegionModule,
     ElectionScheduleModule,
     ElectionPositionModule,
-    ElectionPrecinctModule
+    ElectionPrecinctModule,
+    ElectionCandidateModule,
+    ElectionTallyModule,
+
   ],
   controllers: [],
   providers: [

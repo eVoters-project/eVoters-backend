@@ -42,6 +42,11 @@ export class CreatePositionDto implements PositionInterface {
     })
     election_cycle: string;
 
+    @ApiProperty({ default: '' })
+    @IsString()
+    @IsOptional()
+    type: string;
+
     @ApiProperty({ default: 'Active' })
     @IsString()
     @IsOptional()

@@ -6,6 +6,7 @@ export interface PositionInterface extends BaseEntityInterface {
     name: string;
     description: string;
     level: string;
+    type: string;
     election_cycle: string;
     status: string;
 }

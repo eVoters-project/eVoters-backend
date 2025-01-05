@@ -1,16 +1,16 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
-import { ElectionPositionService } from "./election-position.service";
+import { ElectionTallyService } from "./election-tally.service";
 import { ApiBody, ApiParam, ApiTags } from "@nestjs/swagger";
-import { CreateElectionPositionDto, UpdateElectionPositionDto } from "src/dto";
+import { CreateElectionTallyDto, UpdateElectionTallyDto } from "src/dto";
 
-@ApiTags('Election Positions')
+@ApiTags('Election Tally')
 @Controller({
-    path: 'setup-election-position',
+    path: 'trx-election-tally',
     version: '1'
 })
-export class ElectionPositionController {
+export class ElectionTallyController {
 
-    constructor(private readonly service: ElectionPositionService) { }
+    constructor(private readonly service: ElectionTallyService) { }
 
     @Get()
     getAll() {
@@ -26,20 +26,11 @@ export class ElectionPositionController {
         return this.service.getById(id);
     }
 
-    @Get('schedule/:id')
-    @ApiParam({
-        name: 'id',
-        required: true
-    })
-    getBySchedule(@Param('id') id: string) {
-        return this.service.getBySchedule(id);
-    }
-
     @Post()
     @ApiBody({
-        type: CreateElectionPositionDto
+        type: CreateElectionTallyDto
     })
-    create(@Body() body: CreateElectionPositionDto) {
+    create(@Body() body: CreateElectionTallyDto) {
         return this.service.create(body);
     }
 
@@ -49,9 +40,9 @@ export class ElectionPositionController {
         required: true
     })
     @ApiBody({
-        type: UpdateElectionPositionDto
+        type: UpdateElectionTallyDto
     })
-    update(@Param('id') id: string, @Body() body: UpdateElectionPositionDto) {
+    update(@Param('id') id: string, @Body() body: UpdateElectionTallyDto) {
         return this.service.update(id, body);
     }
 
@@ -63,4 +54,5 @@ export class ElectionPositionController {
     delete(@Param('id') id: string) {
         return this.service.delete(id);
     }
+
 }

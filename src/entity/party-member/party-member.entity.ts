@@ -7,7 +7,7 @@ import { PartyEntity } from "../party/party.entity";
 @Entity('setup_party_member')
 export class PartyMemberEntity extends BaseEntity implements PartyMemberInterface {
 
-    @Column({ type: 'int' })
+    @Column({ type: 'int', default: 0 })
     sequence: number;
 
     @ManyToOne(() => VoterEntity, e => e.id)

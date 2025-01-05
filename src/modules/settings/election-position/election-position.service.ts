@@ -9,7 +9,11 @@ export class ElectionPositionService {
     constructor(private readonly datasource: DataSource) { }
 
     async getAll() {
-        const data = await this.datasource.manager.find(ElectionPositionEntity);
+        const data = await this.datasource.manager.find(ElectionPositionEntity, {
+            relations: {
+                position: true
+            }
+        });
         return this.responseDtoArray(data);
     }
 
@@ -20,6 +24,20 @@ export class ElectionPositionService {
             }
         });
         return this.responseDto(data);
+    }
+
+    async getBySchedule(id: string) {
+        const data = await this.datasource.manager.find(ElectionPositionEntity, {
+            relations: {
+                position: true
+            },
+            where: {
+                election_schedule: {
+                    id: id
+                }
+            }
+        });
+        return this.responseDtoArray(data);
     }
 
     async create(dto: CreateElectionPositionDto) {
@@ -51,22 +69,35 @@ export class ElectionPositionService {
     }
 
     private responseDto(entity: ElectionPositionEntity): ResponseElectionPositionDto {
-        return Object.assign(new ResponseElectionScheduleDto(), (({
-            id, code, name, description, status
+        return Object.assign(new ResponseElectionPositionDto(), (({
+            id,
+            seat,
+            position,
+            remarks
         }) => ({
-            id, code, name, description, status
+            id,
+            seat,
+            name: position?.name ?? '',
+            remarks
         }))(entity));
     }
 
-    private responseDtoArray(entity: ElectionPositionEntity[]): ResponseElectionScheduleDto[] {
-        const rDto: ResponseElectionScheduleDto[] = [];
+    private responseDtoArray(entity: ElectionPositionEntity[]): ResponseElectionPositionDto[] {
+        const rDto: ResponseElectionPositionDto[] = [];
         entity.forEach(e => {
-            rDto.push(Object.assign(new ResponseElectionScheduleDto(), (({
-                id, code, name, description, status
+            rDto.push(Object.assign(new ResponseElectionPositionDto(), (({
+                id,
+                seat,
+                position,
+                remarks
             }) => ({
-                id, code, name, description, status
+                id,
+                seat,
+                name: position?.name ?? '',
+                remarks
             }))(e)))
         });
         return rDto;
     }
+
 }

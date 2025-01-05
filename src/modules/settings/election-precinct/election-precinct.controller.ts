@@ -1,9 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
 import { ElectionPrecinctService } from "./election-precinct.service";
-import { ApiBody, ApiParam } from "@nestjs/swagger";
+import { ApiBody, ApiParam, ApiTags } from "@nestjs/swagger";
 import { CreateElectionPrecinctDto } from "src/dto/election-precinct/create-election-precinct.dto";
 import { UpdateElectionPrecinctDto } from "src/dto/election-precinct/update-election-precinct.dto";
 
+@ApiTags('Election Precinct')
 @Controller({
     path: 'setup-election-precinct',
     version: '1'

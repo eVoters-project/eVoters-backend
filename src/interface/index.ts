@@ -2,8 +2,10 @@ export * from './abstract/entity/base.entity.interface';
 
 export * from './entity/leader/leader.entity.interface';
 export * from './entity/voter/voter.entity.interface';
-export * from './entity/party/party.entity.interface';
 export * from './entity/user/user.entity.interface';
+
+export * from './entity/party/party.entity.interface';
+export * from './entity/party-member/party-member.interface';
 
 export * from './entity/campaign/campaign.interface';
 export * from './entity/straw-vote/straw-vote.entity.interface';
@@ -24,12 +26,11 @@ export * from './entity/area-lgu/area-lgu.interface';
 export * from './entity/area-province/area-province.interface';
 export * from './entity/area-region/area-region.interface';
 
-export * from './entity/election-position/election-position.interface';
 export * from './entity/election-schedule/election-schedule.interface';
-export * from './entity/election-schedule-candidate/election-schedule-candidate.interface';
-export * from './entity/election-schedule-candidate-vote-count/election-schedule-candidate-vote-count.interface';
-export * from './entity/election-schedule-position/election-schedule-position.interface';
-export * from './entity/election-survey-tally/election-survey-tally.interface';
-export * from './entity/election-survey-tally-count/election-survey-tally-count.interface';
+export * from './entity/election-position/election-position.interface';
+export * from './entity/election-candidate/election-candidate.interface';
 export * from './entity/election-tally/election-tally.interface';
-export * from './entity/election-tally-count/election-tally-count.interface';
+export * from './entity/election-tally/election-tally.interface';
+
+export * from './entity/election-position-template/election-position-template.interface';
+export * from './entity/election-position-template-detail/election-position-template-detail.interface';

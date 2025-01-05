@@ -20,6 +20,4 @@ export * from './area-region/area-region.entity';
 
 export * from './election-position/election-position.entity';
 export * from './election-schedule/election-schedule.entity';
-export * from './election-schedule-candidate/election-schedule-candidate.entity';
-export * from './election-schedule-candidate-vote-count/election-schedule-candidate-vote-count.entity';
-export * from './election-schedule-position/election-schedule-position.entity';
+export * from './election-candidate/election-candidate.entity';

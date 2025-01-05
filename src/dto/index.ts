@@ -1,3 +1,5 @@
+export * from './_base/base.dto';
+
 export * from './voter/create-voter.dto';
 export * from './voter/update-voter.dto';
 export * from './voter/response-voter.dto';
@@ -71,10 +73,6 @@ export * from './election-schedule/create-election-schedule.dto';
 export * from './election-schedule/update-election-schedule.dto';
 export * from './election-schedule/response-election-schedule.dto';
 
-export * from './election-schedule-position/create-election-schedule-position.dto';
-export * from './election-schedule-position/update-election-schedule-position.dto';
-export * from './election-schedule-position/response-election-schedule-position.dto';
-
 export * from './campaign/create-campaign.dto';
 export * from './campaign/update-campaign.dto';
 export * from './campaign/response-campaign.dto';
@@ -83,3 +81,15 @@ export * from './campaign/send-sms-campaign.dto';
 export * from './election-position/create-election-position.dto';
 export * from './election-position/response-election-position.dto';
 export * from './election-position/update-election-position.dto';
+
+export * from './election-candidate/create-election-candidate.dto';
+export * from './election-candidate/response-election-candidate.dto';
+export * from './election-candidate/update-election-candidate.dto';
+
+export * from './election-tally/create-election-tally.dto';
+export * from './election-tally/response-election-tally.dto';
+export * from './election-tally/update-election-tally.dto';
+
+export * from './party-member/create-party-member.dto';
+export * from './party-member/update-party-member.dto';
+export * from './party-member/response-party-member.dto';

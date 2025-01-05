@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable, NotFoundException } from "@nestj
 import { CreateElectionScheduleDto } from "src/dto/election-schedule/create-election-schedule.dto";
 import { ResponseElectionScheduleDto } from "src/dto/election-schedule/response-election-schedule.dto";
 import { UpdateElectionScheduleDto } from "src/dto/election-schedule/update-election-schedule.dto";
-import { ElectionSchedulePositionEntity } from "src/entity/election-schedule-position/election-schedule-position.entity";
+import { ElectionPositionEntity } from "src/entity";
 import { ElectionScheduleEntity } from "src/entity/election-schedule/election-schedule.entity";
 import { DataSource } from "typeorm";
 
@@ -13,10 +13,8 @@ export class ElectionScheduleService {
 
     async getAll() {
         const data = await this.datasource.manager.find(ElectionScheduleEntity, {
-            relations: {
-                elective_positions: {
-                    position: true
-                }
+            order: {
+                date: 'ASC'
             }
         });
         return this.responseDtoArray(data);
@@ -50,9 +48,9 @@ export class ElectionScheduleService {
                 const master_key = await runner.manager.save(ElectionScheduleEntity, model);
 
                 await Promise.all(detail.map(async dtl => {
-                    const model = runner.manager.create(ElectionSchedulePositionEntity, dtl);
+                    const model = runner.manager.create(ElectionPositionEntity, dtl);
                     model.election_schedule = master_key;
-                    await runner.manager.save(ElectionSchedulePositionEntity, model);
+                    await runner.manager.save(ElectionPositionEntity, model);
                 }));
 
                 await runner.commitTransaction();
@@ -97,16 +95,19 @@ export class ElectionScheduleService {
 
     private responseDto(entity: ElectionScheduleEntity): ResponseElectionScheduleDto {
         return Object.assign(new ResponseElectionScheduleDto(), (({
-            created_at, updated_at, elective_positions, ...election
+            created_at, updated_at, ...election
         }) => ({
-            ...election,
-            elective_positions: elective_positions?.sort((a, b) => a.sequence - b.sequence).map(ep => ({
-                id: ep.id,
-                sequence: ep.sequence,
-                quantity: ep.quantity,
-                position: ep.position.name,
-                remarks: ep.remarks
-            }))
+            id: election.id,
+            date: election.date,
+            type: election.type,
+            remarks: election.remarks
+            // elective_positions: elective_positions?.sort((a, b) => a.sequence - b.sequence).map(ep => ({
+            //     id: ep.id,
+            //     sequence: ep.sequence,
+            //     seat: ep.seat,
+            //     position: ep.position.name,
+            //     remarks: ep.remarks
+            // }))
         }))(entity));
     }
 
@@ -116,14 +117,18 @@ export class ElectionScheduleService {
             rDto.push(Object.assign(new ResponseElectionScheduleDto(), (({
                 created_at, updated_at, elective_positions, ...election
             }) => ({
-                ...election,
-                elective_positions: elective_positions?.sort((a, b) => a.sequence - b.sequence)?.map(ep => ({
-                    id: ep.id,
-                    sequence: ep.sequence,
-                    quantity: ep.quantity,
-                    position: ep.position.name,
-                    remarks: ep.remarks
-                }))
+                id: election.id,
+                date: election.date,
+                type: election.type,
+                remarks: election.remarks
+                // ...election,
+                // elective_positions: elective_positions?.sort((a, b) => a.sequence - b.sequence)?.map(ep => ({
+                //     id: ep.id,
+                //     sequence: ep.sequence,
+                //     seat: ep.seat,
+                //     position: ep.position.name,
+                //     remarks: ep.remarks
+                // }))
             }))(e)))
         });
         return rDto;

@@ -20,6 +20,9 @@ export class PositionEntity extends BaseEntity implements PositionInterface {
     level: string;
 
     @Column({ type: 'nvarchar', length: 50 })
+    type: string;
+
+    @Column({ type: 'nvarchar', length: 50 })
     election_cycle: string;
 
     @Column({ type: 'nvarchar', length: 50 })

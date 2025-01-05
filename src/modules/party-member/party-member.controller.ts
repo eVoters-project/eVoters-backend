@@ -1,16 +1,16 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
-import { ElectionPositionService } from "./election-position.service";
 import { ApiBody, ApiParam, ApiTags } from "@nestjs/swagger";
-import { CreateElectionPositionDto, UpdateElectionPositionDto } from "src/dto";
+import { PartyMemberService } from "./party-member.service";
+import { CreatePartyMemberDto, UpdatePartyMemberDto } from "src/dto";
 
-@ApiTags('Election Positions')
+@ApiTags('Party Member')
 @Controller({
-    path: 'setup-election-position',
+    path: 'party-member',
     version: '1'
 })
-export class ElectionPositionController {
+export class PartyMemberController {
 
-    constructor(private readonly service: ElectionPositionService) { }
+    constructor(private service: PartyMemberService) { }
 
     @Get()
     getAll() {
@@ -26,20 +26,20 @@ export class ElectionPositionController {
         return this.service.getById(id);
     }
 
-    @Get('schedule/:id')
+    @Get('party/:id')
     @ApiParam({
         name: 'id',
         required: true
     })
-    getBySchedule(@Param('id') id: string) {
-        return this.service.getBySchedule(id);
+    getByParty(@Param('id') id: string) {
+        return this.service.getByParty(id);
     }
 
     @Post()
     @ApiBody({
-        type: CreateElectionPositionDto
+        type: CreatePartyMemberDto
     })
-    create(@Body() body: CreateElectionPositionDto) {
+    create(@Body() body: CreatePartyMemberDto) {
         return this.service.create(body);
     }
 
@@ -49,11 +49,12 @@ export class ElectionPositionController {
         required: true
     })
     @ApiBody({
-        type: UpdateElectionPositionDto
+        type: UpdatePartyMemberDto
     })
-    update(@Param('id') id: string, @Body() body: UpdateElectionPositionDto) {
+    update(@Param('id') id: string, @Body() body: UpdatePartyMemberDto) {
         return this.service.update(id, body);
     }
+
 
     @Delete(':id')
     @ApiParam({
@@ -63,4 +64,5 @@ export class ElectionPositionController {
     delete(@Param('id') id: string) {
         return this.service.delete(id);
     }
+
 }

@@ -2,7 +2,6 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsArray, IsDateString, IsOptional, IsString, ValidateNested } from "class-validator";
 import { format } from "date-fns";
 import { ElectionScheduleInterface } from "src/interface/entity/election-schedule/election-schedule.interface";
-import { CreateElectionSchedulePositionDto } from "../election-schedule-position/create-election-schedule-position.dto";
 import { Type } from "class-transformer";
 
 export class CreateElectionScheduleDto implements ElectionScheduleInterface {
@@ -18,10 +17,10 @@ export class CreateElectionScheduleDto implements ElectionScheduleInterface {
     @IsOptional()
     remarks: string;
 
-    @ApiProperty({ type: [CreateElectionSchedulePositionDto] })
+    @ApiProperty({ type: [CreateElectionScheduleDto] })
     @IsArray()
     @ValidateNested({ each: true })
     @IsOptional()
-    @Type(() => CreateElectionSchedulePositionDto)
-    elective_positions: CreateElectionSchedulePositionDto[];
+    @Type(() => CreateElectionScheduleDto)
+    elective_positions: CreateElectionScheduleDto[];
 }

@@ -1,21 +1,25 @@
 import { BaseEntity } from "src/abstract/entity/base.entity";
 import { ElectionPositionInterface } from "src/interface";
-import { Column, Entity } from "typeorm";
+import { Column, Entity, ManyToOne } from "typeorm";
+import { PositionEntity } from "../position/position.entity";
+import { ElectionScheduleEntity } from "../election-schedule/election-schedule.entity";
 
 @Entity('setup_election_position')
 export class ElectionPositionEntity extends BaseEntity implements ElectionPositionInterface {
-    @Column({ type: 'smallint', default: 0 })
+
+    @Column({ type: 'smallint', default: 1 })
     sequence: number;
 
-    @Column({ type: 'nvarchar', length: 50 })
-    code: string;
-
-    @Column({ type: 'nvarchar', length: 100 })
-    name: string;
+    @Column({ type: 'smallint', default: 1 })
+    seat: number;
 
     @Column({ type: 'nvarchar', length: 500 })
-    description: string;
+    remarks: string;
 
-    @Column({ type: 'nvarchar', length: 50 })
-    status: string;
+    @ManyToOne(() => PositionEntity, e => e.id, { lazy: false })
+    position: PositionEntity;
+
+    @ManyToOne(() => ElectionScheduleEntity, e => e.id)
+    election_schedule: ElectionScheduleEntity;
+
 }
