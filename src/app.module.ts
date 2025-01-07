@@ -24,9 +24,17 @@ import { ElectionPrecinctModule } from './modules/settings/election-precinct/ele
 import { ElectionCandidateModule } from './modules/settings/election-candidate/election-candidate.module';
 import { ElectionTallyModule } from './modules/election-tally/election-tally.module';
 import { PartyMemberModule } from './modules/party-member/party-member.module';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { MySQLConfigAsync } from './config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: ['.env']
+    }),
+    TypeOrmModule.forRootAsync(MySQLConfigAsync),
     AuthModule,
     DashboardModule,
     CampaignModule,
