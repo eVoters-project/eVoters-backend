@@ -27,6 +27,15 @@ export class ElectionPrecinctController {
         return this.service.getById(id);
     }
 
+    @Get('barangay/:id')
+    @ApiParam({
+        name: 'id',
+        required: true
+    })
+    getByBarangay(@Param('id') id: string) {
+        return this.service.getByBarangay(id);
+    }
+
     @Post()
     @ApiBody({
         type: CreateElectionPrecinctDto

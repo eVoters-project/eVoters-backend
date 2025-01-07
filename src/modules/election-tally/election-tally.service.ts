@@ -32,6 +32,21 @@ export class ElectionTallyService {
         return this.responseDto(data);
     }
 
+    async getBySchedule(id: string) {
+        const data = await this.datasource.manager.find(ElectionTallyEntity, {
+            where: {
+                candidate: {
+                    position: {
+                        election_schedule: {
+                            id: id
+                        }
+                    }
+                }
+            }
+        });
+        return this.responseDtoArray(data);
+    }
+
     async create(dto: CreateElectionTallyDto) {
         const model = this.datasource.manager.create(ElectionTallyEntity, dto);
         const data = await this.datasource.manager.save(ElectionTallyEntity, model);

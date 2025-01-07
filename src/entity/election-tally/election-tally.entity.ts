@@ -3,12 +3,16 @@ import { ElectionTallyInterface } from "src/interface";
 import { Column, Entity, ManyToOne } from "typeorm";
 import { ElectionCandidateEntity } from "../election-candidate/election-candidate.entity";
 import { ElectionPrecinctEntity } from "../election-precinct/election-precinct.entity";
+import { ElectionPositionEntity } from "../election-position/election-position.entity";
 
 @Entity('trx_election_tally')
 export class ElectionTallyEntity extends BaseEntity implements ElectionTallyInterface {
 
     @Column({ type: 'date' })
     date: Date;
+
+    @ManyToOne(() => ElectionPositionEntity, e => e.id)
+    position: ElectionPositionEntity;
 
     @ManyToOne(() => ElectionCandidateEntity, e => e.id)
     candidate: ElectionCandidateEntity;

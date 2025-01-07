@@ -35,6 +35,15 @@ export class ElectionCandidateController {
         return this.service.getBySchedule(id);
     }
 
+    @Get('position/:id')
+    @ApiParam({
+        name: 'id',
+        required: true
+    })
+    getByPosition(@Param('id') id: string) {
+        return this.service.getByPosition(id);
+    }
+
     @Post()
     @ApiBody({
         type: CreateElectionCandidateDto

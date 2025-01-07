@@ -26,6 +26,16 @@ export class ElectionTallyController {
         return this.service.getById(id);
     }
 
+    @Get('schedule/:id')
+    @ApiParam({
+        name: 'id',
+        required: true
+    })
+    getBySchedule(@Param('id') id: string) {
+        console.log('id', id);
+        return this.service.getBySchedule(id);
+    }
+
     @Post()
     @ApiBody({
         type: CreateElectionTallyDto

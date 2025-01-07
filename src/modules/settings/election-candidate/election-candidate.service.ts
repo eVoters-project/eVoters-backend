@@ -70,6 +70,28 @@ export class ElectionCandidateService {
         return this.responseDtoArray(data);
     }
 
+    async getByPosition(id: string) {
+        const data = await this.datasource.manager.find(ElectionCandidateEntity, {
+            relations: {
+                position: {
+                    election_schedule: true,
+                    position: true
+                },
+                party_member: {
+                    voter: true
+                },
+                voter: true
+            },
+            where: {
+                position: {
+                    id: id
+                }
+            }
+        });
+
+        return this.responseDtoArray(data);
+    }
+
     async create(dto: CreateElectionCandidateDto) {
         const model = this.datasource.manager.create(ElectionCandidateEntity, dto);
         const data = await this.datasource.manager.save(ElectionCandidateEntity, model);

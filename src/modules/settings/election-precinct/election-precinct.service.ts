@@ -32,6 +32,24 @@ export class ElectionPrecinctService {
         return this.responseDto(data);
     }
 
+    async getByBarangay(id: string) {
+        const data = await this.datasource.manager.find(ElectionPrecinctEntity, {
+            relations: {
+                area_barangay: true
+            },
+            where: {
+                area_barangay: {
+                    id: id
+                }
+            },
+            order: {
+                cluster: 'ASC',
+                sub_cluster: 'ASC'
+            }
+        });
+        return this.responseDtoArray(data);
+    }
+
     async create(dto: CreateElectionPrecinctDto) {
         const model = this.datasource.manager.create(ElectionPrecinctEntity, dto);
         const data = await this.datasource.manager.save(ElectionPrecinctEntity, model);
