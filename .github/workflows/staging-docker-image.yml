@@ -47,6 +47,6 @@ jobs:
           key: ${{ secrets.STAGING_SSH_KEY }}
           script: |
             cd deployment-scripts/e-voters/
-            docker compose pull evoters_backend
-            docker compose up evoters_backend -d
-            docker compose logs --tail 30 evoters_backend
+            docker-compose pull evoters_backend
+            docker-compose up evoters_backend -d
+            docker-compose logs --tail 30 evoters_backend
