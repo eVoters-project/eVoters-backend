@@ -2,6 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsArray, IsBoolean, IsObject, IsOptional, IsString } from "class-validator";
 import { format } from "date-fns";
 import { AreaBarangayInterface, AreaPurokInterface, PartyInterface, VoterInterface } from "src/interface";
+import { ElectionPrecinctInterface } from "src/interface/entity/election-precinct/election-precinct.interface";
 import { GroupTypeEntityInterface } from "src/interface/entity/group-type/group-type.entity.interface";
 import { PartyMemberInterface } from "src/interface/entity/party-member/party-member.interface";
 
@@ -118,4 +119,9 @@ export class CreateVoterDto implements VoterInterface {
     @ApiProperty({ default: false })
     @IsBoolean()
     unassigned_voter: boolean;
+
+    @ApiProperty({ default: { id: '' } })
+    @IsObject()
+    @IsOptional()
+    precinct: ElectionPrecinctInterface;
 }

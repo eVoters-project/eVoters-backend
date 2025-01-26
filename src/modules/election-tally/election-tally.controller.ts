@@ -32,7 +32,6 @@ export class ElectionTallyController {
         required: true
     })
     getBySchedule(@Param('id') id: string) {
-        console.log('id', id);
         return this.service.getBySchedule(id);
     }
 

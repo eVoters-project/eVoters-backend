@@ -5,6 +5,7 @@ import { AreaBarangayEntity } from "../area-barangay/area-barangay.entity";
 import { AreaPurokEntity } from "../area-purok/area-purok.entity";
 import { PartyMemberEntity } from "../party-member/party-member.entity";
 import { GroupTypeEntity } from "../group-type/group-type.entity";
+import { ElectionPrecinctEntity } from "../election-precinct/election-precinct.entity";
 
 @Entity('setup_voter')
 export class VoterEntity extends BaseEntity implements VoterInterface {
@@ -76,4 +77,7 @@ export class VoterEntity extends BaseEntity implements VoterInterface {
 
     @Column({ type: 'boolean' })
     unassigned_voter: boolean;
+
+    @ManyToOne(() => ElectionPrecinctEntity, e => e.id, { nullable: true })
+    precinct: ElectionPrecinctEntity
 }

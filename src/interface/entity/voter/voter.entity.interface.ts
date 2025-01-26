@@ -4,6 +4,7 @@ import { AreaPurokInterface } from "../area-purok/area-purok.interface";
 import { PartyInterface } from "../party/party.entity.interface";
 import { PartyMemberInterface } from "../party-member/party-member.interface";
 import { GroupTypeEntityInterface } from "../group-type/group-type.entity.interface";
+import { ElectionPrecinctInterface } from "../election-precinct/election-precinct.interface";
 
 export interface VoterInterface extends BaseEntityInterface {
     firstname: string;
@@ -29,4 +30,5 @@ export interface VoterInterface extends BaseEntityInterface {
     verified_voter?: boolean;
     confirmed_leader?: boolean;
     unassigned_voter?: boolean;
+    precinct: ElectionPrecinctInterface;
 }
