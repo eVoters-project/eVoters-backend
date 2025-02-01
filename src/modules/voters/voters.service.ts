@@ -16,7 +16,8 @@ export class VotersService {
                 vote_group: true,
                 parties: {
                     party: true
-                }
+                },
+                precinct: true
             }
         });
         return this.responseDtoArray(data);
@@ -68,7 +69,7 @@ export class VotersService {
                 created_at, updated_at, verified_voter, confirmed_leader, unassigned_voter, ...rest
             }) => ({
                 id: rest.id,
-                precinct_no: rest.precinct_no,
+                precinct_no: rest.precinct ? `${rest.precinct.code} ${rest.precinct.cluster} ${rest.precinct.sub_cluster}` : '',
                 lastname: rest.lastname,
                 firstname_middlename: `${rest?.firstname} ${rest?.middlename}`,
                 mobile_no: rest?.mobile_no,

@@ -11,6 +11,7 @@ export class PositionService {
     async getAll() {
         const data = await this.datasource.manager.find(PositionEntity, {
             order: {
+                code: 'ASC',
                 sequence: 'ASC'
             }
         });

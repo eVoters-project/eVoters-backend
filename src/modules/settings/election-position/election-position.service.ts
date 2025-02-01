@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
+import { format } from "date-fns";
 import { CreateElectionPositionDto, ResponseElectionPositionDto, ResponseElectionScheduleDto, UpdateElectionPositionDto } from "src/dto";
 import { ElectionPositionEntity } from "src/entity";
 import { DataSource } from "typeorm";
@@ -11,6 +12,7 @@ export class ElectionPositionService {
     async getAll() {
         const data = await this.datasource.manager.find(ElectionPositionEntity, {
             relations: {
+                election_schedule: true,
                 position: true
             }
         });
@@ -87,11 +89,13 @@ export class ElectionPositionService {
         entity.forEach(e => {
             rDto.push(Object.assign(new ResponseElectionPositionDto(), (({
                 id,
+                election_schedule,
                 seat,
                 position,
                 remarks
             }) => ({
                 id,
+                schedule: election_schedule ? `${format(election_schedule.date, 'yyyy-MM-dd')} ${election_schedule.type}` : '',
                 seat,
                 name: position?.name ?? '',
                 remarks
