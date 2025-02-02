@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
+import { format } from "date-fns";
 import { CreateElectionTallyDto, ResponseElectionTallyDto, UpdateElectionTallyDto } from "src/dto";
 import { ElectionTallyEntity } from "src/entity/election-tally/election-tally.entity";
 import { VoterInterface } from "src/interface";
@@ -77,13 +78,15 @@ export class ElectionTallyService {
 
     private responseDto(entity: ElectionTallyEntity): ResponseElectionTallyDto {
         return Object.assign(new ResponseElectionTallyDto(), (({
-            id, candidate, precinct, count
+            id, date, candidate, precinct, count
         }) => ({
             id,
+            date: format(date, 'yyyy-MM-dd'),
             candidate: candidate?.party_member?.voter != null
                 ? this.ParseCandidateName(candidate.party_member.voter)
                 : this.ParseCandidateName(candidate?.voter),
             precinct: precinct?.polling_center,
+            candidate_type: candidate.party_member ? 'Party' : 'Independent',
             count
         }))(entity));
     }
@@ -92,13 +95,15 @@ export class ElectionTallyService {
         const rDto: ResponseElectionTallyDto[] = [];
         entity.forEach(e => {
             rDto.push(Object.assign(new ResponseElectionTallyDto(), (({
-                id, candidate, precinct, count
+                id, date, candidate, precinct, count
             }) => ({
                 id,
+                date: format(date, 'yyyy-MM-dd'),
                 candidate: candidate?.party_member?.voter != null
                     ? this.ParseCandidateName(candidate.party_member.voter)
                     : this.ParseCandidateName(candidate?.voter),
                 precinct: precinct?.polling_center,
+                candidate_type: candidate.party_member ? 'Party' : 'Independent',
                 count
             }))(e)))
         });

@@ -5,7 +5,7 @@ import { CreateElectionTallyDto, UpdateElectionTallyDto } from "src/dto";
 
 @ApiTags('Election Tally')
 @Controller({
-    path: 'trx-election-tally',
+    path: 'election-tally',
     version: '1'
 })
 export class ElectionTallyController {
