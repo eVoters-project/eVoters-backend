@@ -93,3 +93,7 @@ export * from './election-tally/update-election-tally.dto';
 export * from './party-member/create-party-member.dto';
 export * from './party-member/update-party-member.dto';
 export * from './party-member/response-party-member.dto';
+
+export * from './vote-count/vote-count-filter.dto';
+export * from './vote-count/response-vote-count-election-per-location.dto';
+export * from './vote-count/vote-count-straw.response.dto';

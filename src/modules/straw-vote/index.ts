@@ -1,1 +1,0 @@
-export * from './straw-vote.module';
